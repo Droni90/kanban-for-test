@@ -58,7 +58,7 @@ const TasksStatus: FC<TasksStatusProps> = memo((props) => {
             />
             }) : null}
         </div>
-        <div ref={drop2} style={{height: "100%", width: "100%"}} />
+        <S.ClearTargetTrigger ref={drop2}  />
     </S.TasksStatusComponent>)
 })
 

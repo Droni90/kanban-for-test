@@ -11,3 +11,8 @@ export const TasksStatusComponent = styled.div`
     flex-direction: column;
     border-right: 1px solid #F3F3F3;
 `
+
+export const ClearTargetTrigger = styled.div`
+    height: 100%;
+    width: 100%;
+`
