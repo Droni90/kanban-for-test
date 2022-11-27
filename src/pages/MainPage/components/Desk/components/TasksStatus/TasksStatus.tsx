@@ -23,18 +23,21 @@ const TasksStatus: FC<TasksStatusProps> = memo((props) => {
     <S.TasksStatusComponent ref={drop}>
         <Title name={name} count={tasks.length} />
         <S.MarginTop />
-        {tasks?.length && tasks.map(task => {
-            return <TaskItem 
-            key={task.text + task.time}  
-            text={task.text} 
-            time={task.time} 
-            taskColor={task.colorTask} 
-            timeColor={task.colorTime}  
-            currentColumn={name}
-            isCompleted={name === 'Completed'}
-            onMoveCard = {moveCard}
-        />
-        })}
+        <div ref={drop}>
+
+            {tasks?.length && tasks.map(task => {
+                return <TaskItem 
+                key={task.text + task.time}  
+                text={task.text} 
+                time={task.time} 
+                taskColor={task.colorTask} 
+                timeColor={task.colorTime}  
+                currentColumn={name}
+                isCompleted={name === 'Completed'}
+                onMoveCard = {moveCard}
+            />
+            })}
+        </div>
     </S.TasksStatusComponent>)
 })
 
