@@ -1,4 +1,5 @@
 import { memo } from "react"
+import Avatar from "../../../../shared/ui/Avatar/Avatar";
 import * as S from "./styles"
 
 interface WorkspaceItemProps  {
@@ -9,7 +10,7 @@ const WorkspaceItem = memo((props: WorkspaceItemProps) => {
     const {avatar, name} = props
     return <S.Workspace>
         <div>
-            <img src={avatar} alt={'Avatar'} />
+            <Avatar width="22px" height="22px" src={avatar} />
             <p>{name}</p>
         </div>
     </S.Workspace>

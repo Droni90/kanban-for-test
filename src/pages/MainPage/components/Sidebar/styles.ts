@@ -8,6 +8,10 @@ export const Wrapper = styled.div`
 
 `
 
+export const MarginTop = styled.div`
+    margin-top: 31px;
+`
+
 export const SidebarMenu = styled.div`
     margin-top: 17px;
 `

@@ -14,10 +14,6 @@ div {
     align-items: center;
     padding: 0 16px; 
 
-    img {
-        width: 22px;
-        height: 22px;
-    };
     p {
         font-size: 14px;
         line-height: 16px;
