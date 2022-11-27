@@ -1,6 +1,5 @@
 import {memo, FC} from 'react'
 import { useDrag } from 'react-dnd';
-import { Task } from '../../Desk';
 import * as S from './styles'
 
 interface TaskItemProps {
@@ -10,22 +9,23 @@ interface TaskItemProps {
     taskColor?: string;
     isCompleted?: boolean;
     currentColumn: string;
-    onMoveCard?: (currentItem: Task, currentColumn: string, targetColumn: string) => void;
+    index?: number;
+    id: string;
+    onMoveCard?: (itemId: string, currentColumn: string, targetColumn: string) => void;
 }
 const TaskItem: FC<TaskItemProps> = memo((props) => {
-    const { text, time, timeColor, taskColor, isCompleted, currentColumn, onMoveCard} = props
+    const { text, time, timeColor, taskColor, isCompleted, currentColumn, index, id, onMoveCard} = props
 
 
     const [{ opacity }, dragRef] = useDrag(
         () => ({
-          type: "Our first type",
-          item: { text, time, colorTime: timeColor, colorTask: taskColor},
+          type: "task",
+          item: { index, id},
           end: (item, monitor) => {
             const dropResult: {targetColumn: string} = monitor.getDropResult() as {targetColumn: string} 
             if(dropResult){
-                onMoveCard?.({text: item.text, time: item.time, colorTask: item.colorTask, colorTime: item.colorTime}, currentColumn, dropResult.targetColumn)
+                onMoveCard?.(item.id, currentColumn, dropResult.targetColumn)
             }
-
           },
           collect: (monitor) => ({
             opacity: monitor.isDragging() ? 0.5 : 1
@@ -33,6 +33,7 @@ const TaskItem: FC<TaskItemProps> = memo((props) => {
         }),
         []
       )
+
 
 
     return(
