@@ -1,7 +1,7 @@
 import  {memo, FC, useState, useCallback} from 'react'
-import Button from '../ui/Button/Button';
-import {ReactComponent as UpIcon} from '../../assets/icons/up.svg'
-import {ReactComponent as DownIcon} from '../../assets/icons/down.svg'
+import Button from '../Button/Button';
+import {ReactComponent as UpIcon} from '../../../assets/icons/up.svg'
+import {ReactComponent as DownIcon} from '../../../assets/icons/down.svg'
 import * as S from './styles'
 
 interface DropdownProps {
@@ -13,7 +13,7 @@ const Dropdown:FC<DropdownProps> = memo((props) => {
     const [isOpen, setIsOpen] = useState(false)
 
 
-    const openMenu = useCallback(() => setIsOpen(true), []);
+    const toggleMenu = useCallback(() => setIsOpen(prev => !prev), []);
 
     const onOptionClicked = useCallback((value: string) => () => {
       setSelectedOption(value);
@@ -28,7 +28,7 @@ const Dropdown:FC<DropdownProps> = memo((props) => {
                 rounded 
                 color={isOpen ? '#E1E4E7' : "#F5F8FA"  }
                 textColor='#222' 
-                onClick={openMenu}
+                onClick={toggleMenu}
             >
                 <span>{selectedOption}</span>
                 {isOpen ? <DownIcon fill='#8C939F' /> : <UpIcon />} 

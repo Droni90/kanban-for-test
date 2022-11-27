@@ -5,7 +5,7 @@ import AvatarImg from "../../../../assets/images/Avatar.png"
 import Button from "../../../../shared/ui/Button/Button";
 import {ReactComponent as PlusIcon} from "../../../../assets/icons/plus.svg"
 import * as S from './styles'
-import Dropdown from "../../../../shared/Dropdown/Dropdown";
+import Dropdown from "../../../../shared/ui/Dropdown/Dropdown";
 import Notification from "./components/Notification/Notification";
 
 const Header: FC = memo(() => {
