@@ -4,6 +4,7 @@ import {ReactComponent as PlusIcon} from '../../../../assets/icons/plus.svg'
 import * as S from './styles'
 import { DndProvider } from 'react-dnd/dist/core'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import produce from "immer";
 
 export interface Task{
     id: string,
@@ -44,14 +45,35 @@ const Desk: FC = memo(() => {
         ]                 
     })
 
-    const moveCard = useCallback((itemId: string, currentColumn: string, targetColumn: string) => {
-        setTasks((prev) => {
-           const obj = prev[currentColumn].find(i => i.id === itemId)
-           prev[currentColumn] = prev[currentColumn].filter(cur => cur.id !== itemId)
-           prev[targetColumn].push(obj!)
+    const moveCard = useCallback((itemId: string, targetItemId: string, currentColumn: string, targetColumn: string, targetIndex: number, drugIndex: number) => {
+        setTasks(produce((prev) => {
+            const drugingTask: Task = prev[currentColumn].find((i) => i.id === itemId)!
+            let prevItem
 
-           return JSON.parse(JSON.stringify(prev))
-        })
+            if(targetIndex === null || !prev[targetColumn].length){
+             prev[currentColumn] = prev[currentColumn].filter((i) => i.id !== itemId)
+             prev[targetColumn].push(drugingTask)
+             return;
+            }
+
+           const currentIdx = prev[currentColumn].findIndex(i => i.id === itemId) 
+           const targetIndx = prev[targetColumn].findIndex(i => i.id === targetItemId) 
+
+            const targetTask = prev[targetColumn].find((i) => i.id === targetItemId)
+            if(currentColumn === targetColumn){
+             prevItem = prev[currentColumn].splice(targetIndx , 1, drugingTask);
+             prev[currentColumn].splice(currentIdx, 1, prevItem[0])
+        
+            }else{
+                if(targetTask){
+                    prevItem = prev[currentColumn].splice(currentIdx, 1, targetTask )
+                }else{
+                    prevItem = prev[currentColumn].splice(currentIdx, 1 )
+                }
+             prev[targetColumn].splice(targetIndx, 1, prevItem[0]);
+            }
+ 
+        }))
       }, [])
 
 

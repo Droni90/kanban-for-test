@@ -5,7 +5,7 @@ export const TitleComponent = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 58px;
+    min-height: 58px;
     border-bottom: 1px solid #F3F3F3;
 `
 

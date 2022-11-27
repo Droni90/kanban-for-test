@@ -1,4 +1,4 @@
-import {memo, FC} from 'react'
+import {memo, useState,  useCallback ,FC} from 'react'
 import { Task } from '../../Desk';
 import TaskItem from '../TaskItem/TaskItem';
 import Title from '../Titile/Title';
@@ -8,24 +8,41 @@ import { useDrop } from 'react-dnd';
 interface TasksStatusProps {
     tasks: Task[];
     name: string;
-    moveCard?: (itemId: string, currentColumn: string, targetColumn: string) => void
+    moveCard?: (itemId: string, targetItemId: string, currentColumn: string, targetColumn: string, targetIndex: number, drugIndex: number) => void
 }
 const TasksStatus: FC<TasksStatusProps> = memo((props) => {
     const {tasks, name, moveCard} = props
+    const [drugIndex, setDrugIndex] = useState(0)
+    const [targetIndex, setTargetIndex] = useState<number | null>(null)
+    const [targetGroup, setTargetGroup] = useState('')
+    const [targetItemId, setTargetItemId] = useState('')
+
+    const setTargets = useCallback((drugIndex: number, targetIndex: number, targetGroup: string, targetItemId: string)=> {
+        setDrugIndex(drugIndex)
+        setTargetIndex(targetIndex)
+        setTargetGroup(targetGroup)
+        setTargetItemId(targetItemId)
+    }, [])
+
 
     const [, drop] = useDrop(() => ({
         accept: "task",
-        drop: () => ({targetColumn: name})
-      }))
+        drop: () => ({targetColumn: targetGroup || name, targetIndex, drugIndex, targetItemId}),
+      }), [drugIndex, targetIndex, targetGroup, targetItemId])
+
+      const [, drop2] = useDrop(() => ({
+        accept: "task",
+        hover: () =>{if(targetIndex){ setTargetIndex(null) }}
+      }), [drugIndex, targetIndex, targetGroup, targetItemId])
+
 
     
     return(
     <S.TasksStatusComponent ref={drop}>
         <Title name={name} count={tasks.length} />
         <S.MarginTop />
-        <div ref={drop}>
-
-            {tasks?.length && tasks.map((task, index) => {
+        <div>
+            {tasks?.length ? tasks.map((task, index) => {
                 return <TaskItem 
                 key={task.id}  
                 text={task.text} 
@@ -37,9 +54,11 @@ const TasksStatus: FC<TasksStatusProps> = memo((props) => {
                 onMoveCard = {moveCard}
                 index={index}
                 id={task.id}
+                setTargets={setTargets}
             />
-            })}
+            }) : null}
         </div>
+        <div ref={drop2} style={{height: "100%", width: "100%"}} />
     </S.TasksStatusComponent>)
 })
 
