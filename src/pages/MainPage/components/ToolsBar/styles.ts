@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
     height: 100%;
     background: #F5F8FA;
-    width: 154px;
+    min-width: 154px;
     box-sizing: border-box;
 `;
 
@@ -19,7 +19,6 @@ interface ToolsBarItemProps {
     isActive: boolean
   }
 export const ToolsBarItem = styled.div<ToolsBarItemProps>`
-    width: 100%;
     display: flex;
     position:relative;
     height: 50px;
