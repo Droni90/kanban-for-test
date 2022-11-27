@@ -2,16 +2,25 @@ import {memo, FC} from 'react'
 import { Task } from '../../Desk';
 import TaskItem from '../TaskItem/TaskItem';
 import Title from '../Titile/Title';
-import * as S from './styles'
+import * as S from './styles';
+import { useDrop } from 'react-dnd';
 
 interface TasksStatusProps {
     tasks: Task[];
-    name: string
+    name: string;
+    moveCard?: (currentItem: Task, currentColumn: string, targetColumn: string) => void
 }
 const TasksStatus: FC<TasksStatusProps> = memo((props) => {
-    const {tasks, name} = props
+    const {tasks, name, moveCard} = props
+
+    const [, drop] = useDrop(() => ({
+        accept: "Our first type",
+        drop: () => ({targetColumn: name})
+      }))
+
+    
     return(
-    <S.TasksStatusComponent>
+    <S.TasksStatusComponent ref={drop}>
         <Title name={name} count={tasks.length} />
         <S.MarginTop />
         {tasks?.length && tasks.map(task => {
@@ -21,7 +30,9 @@ const TasksStatus: FC<TasksStatusProps> = memo((props) => {
             time={task.time} 
             taskColor={task.colorTask} 
             timeColor={task.colorTime}  
+            currentColumn={name}
             isCompleted={name === 'Completed'}
+            onMoveCard = {moveCard}
         />
         })}
     </S.TasksStatusComponent>)

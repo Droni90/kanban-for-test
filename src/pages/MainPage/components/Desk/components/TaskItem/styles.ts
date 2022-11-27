@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 interface TaskItemComponentProps {
     color?: string;
-    isCompleted?: boolean
+    isCompleted?: boolean;
+    opacity?: number;
 }
 export const TaskItemComponent = styled.div<TaskItemComponentProps>`
     width: 270px;
@@ -21,6 +22,8 @@ export const TaskItemComponent = styled.div<TaskItemComponentProps>`
     align-items: center;
     border-radius: 8px;
     margin-bottom: 10px;
+    cursor: pointer;
+    opacity: ${({opacity}) => opacity ? opacity : 1}
 `
 
 interface TextProps {

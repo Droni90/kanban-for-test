@@ -36,4 +36,7 @@ export const SidebarLink = styled.div`
     color: #8C939F;
     margin-bottom: 18px;
     cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    };
 `
