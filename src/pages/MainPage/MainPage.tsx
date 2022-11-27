@@ -1,17 +1,22 @@
 import { FC } from "react";
+import Desk from "./components/Desk/Desk";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ToolsBar from "./components/ToolsBar/ToolsBar";
-import { Container } from "./styles";
+import * as S from "./styles";
 
 const MainPage: FC = () => {
 
     return (
-        <Container>
+        <S.Container>
             <Sidebar />
             <ToolsBar />
-            <Header />
-        </Container>
+            <S.Content>
+                <Header />
+                <Desk />
+            </S.Content>
+           
+        </S.Container>
     )
 }
 

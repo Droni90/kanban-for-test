@@ -16,7 +16,7 @@ const Header: FC = memo(() => {
     <S.Header>
         <S.Left>
             <Button type="button" rounded>
-                <PlusIcon />
+                <PlusIcon fill="#fff" />
                 <span>Add new</span>
             </Button>
             <S.MarginRight />
