@@ -1,22 +1,21 @@
 import styled from "styled-components";
 
-
 interface ButtonComponentProps {
-    rounded?: boolean;
-    color?: string;
-    textColor?: string;
-    iconLeft?: boolean
+  rounded?: boolean;
+  color?: string;
+  textColor?: string;
+  iconLeft?: boolean;
 }
 export const ButtonComponent = styled.button<ButtonComponentProps>`
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: ${({textColor}) => textColor ? textColor : '#fff'};
+    color: ${({ textColor }) => (textColor ? textColor : "#fff")};
     padding: 12px 20px;
-    background: ${({color}) => color ? color : '#0094FF'};
+    background: ${({ color }) => (color ? color : "#0094FF")};
     border: none;
-    border-radius: ${({rounded}) => rounded ? "50px" : 'none'};
-    fill: ${({textColor}) => textColor ? textColor : '#fff'};
+    border-radius: ${({ rounded }) => (rounded ? "50px" : "none")};
+    fill: ${({ textColor }) => (textColor ? textColor : "#fff")};
     font-size: 14px;
     line-height: 16px;
     &:hover {
@@ -26,8 +25,8 @@ export const ButtonComponent = styled.button<ButtonComponentProps>`
       }
 
       span {
-        margin: ${({iconLeft}) => iconLeft ? '0 0 0 7px' : '0 7px 0 0'};
+        margin: ${({ iconLeft }) => (iconLeft ? "0 0 0 7px" : "0 7px 0 0")};
       }
     }
 
-`
+`;

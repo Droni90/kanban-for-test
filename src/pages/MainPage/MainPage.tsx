@@ -6,18 +6,16 @@ import ToolsBar from "./components/ToolsBar/ToolsBar";
 import * as S from "./styles";
 
 const MainPage: FC = () => {
+  return (
+    <S.Container>
+      <Sidebar />
+      <ToolsBar />
+      <S.Content>
+        <Header />
+        <Desk />
+      </S.Content>
+    </S.Container>
+  );
+};
 
-    return (
-        <S.Container>
-            <Sidebar />
-            <ToolsBar />
-            <S.Content>
-                <Header />
-                <Desk />
-            </S.Content>
-           
-        </S.Container>
-    )
-}
-
-export default MainPage 
+export default MainPage;

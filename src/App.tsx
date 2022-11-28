@@ -3,7 +3,7 @@ import GlobalStyles from "./styles/globalStyles";
 
 function App() {
   return (
-    <div style={{height: '100%'}}>
+    <div style={{ height: "100%" }}>
       <MainPage />
       <GlobalStyles />
     </div>
