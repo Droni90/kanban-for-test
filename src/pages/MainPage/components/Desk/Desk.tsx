@@ -1,5 +1,5 @@
 import { memo, FC, useState, useCallback } from "react";
-import TasksStatus from "./components/TasksStatus/TasksStatus";
+import TasksColumn from "./components/TaskColumn/TaskColumn";
 import { ReactComponent as PlusIcon } from "../../../../assets/icons/plus.svg";
 import * as S from "./styles";
 import { DndProvider } from "react-dnd/dist/core";
@@ -167,7 +167,7 @@ const Desk: FC = memo(() => {
       <DndProvider backend={HTML5Backend}>
         {Object.keys(tasks).map((task: string) => {
           return (
-            <TasksStatus
+            <TasksColumn
               key={task}
               name={task}
               tasks={tasks[task]}

@@ -5,7 +5,7 @@ import Title from "../Titile/Title";
 import * as S from "./styles";
 import { useDrop } from "react-dnd";
 
-interface TasksStatusProps {
+interface TaskColumnProps {
   tasks: Task[];
   name: string;
   moveCard?: (
@@ -17,7 +17,7 @@ interface TasksStatusProps {
     dragIndex: number
   ) => void;
 }
-const TasksStatus: FC<TasksStatusProps> = memo((props) => {
+const TaskColumn: FC<TaskColumnProps> = memo((props) => {
   const { tasks, name, moveCard } = props;
   const [dragIndex, setDragIndex] = useState(0);
   const [targetIndex, setTargetIndex] = useState<number | null>(null);
@@ -65,7 +65,7 @@ const TasksStatus: FC<TasksStatusProps> = memo((props) => {
   );
 
   return (
-    <S.TasksStatusComponent ref={drop}>
+    <S.TaskColumnComponent ref={drop}>
       <Title name={name} count={tasks.length} />
       <S.MarginTop />
       <div>
@@ -90,8 +90,8 @@ const TasksStatus: FC<TasksStatusProps> = memo((props) => {
           : null}
       </div>
       <S.ClearTargetTrigger ref={drop2} />
-    </S.TasksStatusComponent>
+    </S.TaskColumnComponent>
   );
 });
 
-export default TasksStatus;
+export default TaskColumn;
